@@ -8,6 +8,10 @@
 
 **Empowering young women in Africa with AI-driven digital safety tools through interactive gaming and education.**
 
+## 🚀 Live Demo
+
+[View Live Application](https://consent-repo-indol.vercel.app/)
+
 ![Consent Quest Banner](https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)
 
 ## 🌟 Mission
