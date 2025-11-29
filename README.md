@@ -14,6 +14,10 @@
 
 ![Consent Quest Banner](https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)
 
+## 📊 Pitch Deck
+
+[View Pitch Deck](https://www.canva.com/design/DAG6FGKwr9s/IDsim_qoGDtbekkyx-8iUA/edit?utm_content=DAG6FGKwr9s&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ## 🌟 Mission
 
 Digital abuse is rampant in Africa, where young women face targeted scams, harassment, and exploitation. **Consent Quest: Safety Sentinel** transforms digital literacy into an interactive adventure, using augmented reality, AI analysis, and gamified education to help users spot and avoid online threats while building confidence and community.
