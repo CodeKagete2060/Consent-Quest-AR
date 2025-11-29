@@ -113,6 +113,23 @@ a {
   gap: 8px;
 }
 
+.panic-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: var(--color-danger);
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }

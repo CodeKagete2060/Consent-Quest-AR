@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Phone, Globe, ShieldAlert, CheckSquare, MessageCircle, Mail } from 'lucide-react';
+import { Analytics } from '../utils/analytics';
 
 interface Contact {
     type: 'phone' | 'whatsapp' | 'email' | 'website';
@@ -83,6 +84,10 @@ export const Help: React.FC = () => {
     const navigate = useNavigate();
     const [country, setCountry] = useState('Kenya');
 
+    useEffect(() => {
+        Analytics.helpOpened(country);
+    }, [country]);
+
     return (
         <div className="container fade-in">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', color: 'var(--color-danger)' }}>
@@ -147,7 +152,7 @@ export const Help: React.FC = () => {
                                     break;
                             }
                             return (
-                                <a key={idx} href={href} target={contact.type === 'website' ? '_blank' : undefined} rel={contact.type === 'website' ? 'noreferrer' : undefined} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
+                                <a key={idx} href={href} target={contact.type === 'website' ? '_blank' : undefined} rel={contact.type === 'website' ? 'noreferrer' : undefined} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.9rem' }} onClick={() => Analytics.helpResourceClicked(country, resource.name, contact.type)}>
                                     {icon} {label}
                                 </a>
                             );

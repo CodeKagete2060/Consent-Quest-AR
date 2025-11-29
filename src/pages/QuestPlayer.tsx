@@ -3,8 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, BookOpen } from 'lucide-react';
 import type { Quest } from '../types';
-import { saveProgress } from '../utils/storage';
+import { saveProgress, getProgress, markCardGenerated } from '../utils/storage';
 import { HelpButton } from '../components/HelpButton';
+import { ShareCardModal } from '../components/ShareCardModal';
+import { Analytics } from '../utils/analytics';
 
 export const QuestPlayer: React.FC = () => {
     const { questId } = useParams<{ questId: string }>();
@@ -12,6 +14,7 @@ export const QuestPlayer: React.FC = () => {
     const [quest, setQuest] = useState<Quest | null>(null);
     const [currentSceneId, setCurrentSceneId] = useState<string>('start');
     const [quests, setQuests] = useState<Quest[]>([]);
+    const [showCardModal, setShowCardModal] = useState(false);
 
     useEffect(() => {
         import('../data/quests.json').then(module => {
@@ -22,7 +25,11 @@ export const QuestPlayer: React.FC = () => {
     useEffect(() => {
         if (quests.length > 0) {
             const found = quests.find(q => q.id === questId);
-            if (found) setQuest(found);
+            if (found) {
+                setQuest(found);
+                Analytics.arStarted(found.id);
+                Analytics.questViewed(found.id);
+            }
         }
     }, [questId, quests]);
 
@@ -32,12 +39,25 @@ export const QuestPlayer: React.FC = () => {
     if (!currentScene) return <div className="container">Error: Scene not found</div>;
 
     const handleChoice = (nextId: string) => {
+        const choice = currentScene.choices?.find(c => c.next === nextId);
+        if (choice && quest) {
+            Analytics.questChoice(quest.id, currentSceneId, choice.type || 'constructive', choice.text);
+        }
         setCurrentSceneId(nextId);
     };
 
     const handleFinish = () => {
+        const prevProgress = getProgress();
         saveProgress(quest.xp, quest.badge, quest.id);
-        navigate('/badges');
+        Analytics.questCompleted(quest.id, quest.xp, quest.badge);
+
+        // Check if badge is new
+        if (!prevProgress.badges.includes(quest.badge)) {
+            markCardGenerated(quest.badge);
+            setShowCardModal(true);
+        } else {
+            navigate('/badges');
+        }
     };
 
     return (
@@ -145,6 +165,17 @@ export const QuestPlayer: React.FC = () => {
             </AnimatePresence>
 
             <HelpButton />
+
+            {showCardModal && quest && (
+                <ShareCardModal
+                    badge={quest.badge}
+                    xp={getProgress().xp}
+                    onClose={() => {
+                        setShowCardModal(false);
+                        navigate('/badges');
+                    }}
+                />
+            )}
         </div>
     );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Heart } from 'lucide-react';
 import type { Quest } from '../types';
+import { Analytics } from '../utils/analytics';
 
 export const Library: React.FC = () => {
     const navigate = useNavigate();
@@ -12,6 +13,10 @@ export const Library: React.FC = () => {
         import('../data/quests.json').then(module => {
             setQuests(module.default as unknown as Quest[]);
         });
+    }, []);
+
+    useEffect(() => {
+        Analytics.libraryOpened();
     }, []);
 
     const filteredQuests = quests.filter(q => q.track === activeTab);

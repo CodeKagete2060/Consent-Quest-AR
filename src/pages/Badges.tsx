@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Star, Award } from 'lucide-react';
+import { Star, Award, Share } from 'lucide-react';
 import { getProgress } from '../utils/storage';
+import { ShareCardModal } from '../components/ShareCardModal';
 
 export const Badges: React.FC = () => {
     const navigate = useNavigate();
-    const [progress, setProgress] = useState<{ xp: number; badges: string[] }>({ xp: 0, badges: [] });
+    const [progress, setProgress] = useState<{ xp: number; badges: string[]; generatedCards: string[] }>({ xp: 0, badges: [], generatedCards: [] });
+    const [selectedBadge, setSelectedBadge] = useState<string | null>(null);
 
     useEffect(() => {
         setProgress(getProgress());
@@ -32,6 +34,16 @@ export const Badges: React.FC = () => {
                         <div key={index} className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
                             <Award size={32} color="var(--color-warning)" style={{ marginBottom: '8px' }} />
                             <span style={{ fontWeight: 'bold' }}>{badge}</span>
+                            {progress.generatedCards.includes(badge) && (
+                                <button
+                                    className="btn btn-outline"
+                                    style={{ marginTop: '8px', fontSize: '0.8rem', padding: '4px 8px' }}
+                                    onClick={() => setSelectedBadge(badge)}
+                                >
+                                    <Share size={12} style={{ marginRight: '4px' }} />
+                                    View Card
+                                </button>
+                            )}
                         </div>
                     ))
                 )}
@@ -40,6 +52,14 @@ export const Badges: React.FC = () => {
             <button className="btn btn-outline btn-block" style={{ marginTop: 'auto' }} onClick={() => navigate('/')}>
                 Back to Home
             </button>
+
+            {selectedBadge && (
+                <ShareCardModal
+                    badge={selectedBadge}
+                    xp={progress.xp}
+                    onClose={() => setSelectedBadge(null)}
+                />
+            )}
         </div>
     );
 };

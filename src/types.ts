@@ -34,6 +34,55 @@ export interface Quest {
   badge: string;
 }
 
+// New types for Safety Sentinel features
+export interface UserProfile {
+  ageRange: string;
+  interests: string[];
+  country: string;
+  safetyScore: number;
+  lastActive: Date;
+}
+
+export interface Threat {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  risk: 'low' | 'medium' | 'high';
+  timestamp: Date;
+  location: string;
+  aiAnalysis: string;
+  isRead: boolean;
+}
+
+export interface Report {
+  id: string;
+  category: string;
+  description: string;
+  timestamp: Date;
+  status: 'pending' | 'reviewed' | 'resolved';
+  anonymous: boolean;
+}
+
+export interface SafetyVideo {
+  id: string;
+  title: string;
+  script: string;
+  duration: number;
+  generatedAt: Date;
+}
+
+export interface ScamAnalysis {
+  risk: 'low' | 'medium' | 'high';
+  explanation: string;
+  advice: string;
+}
+
+export interface SafetyTip {
+  tip: string;
+  category: string;
+}
+
 // MindAR types
 declare global {
   interface Window {
