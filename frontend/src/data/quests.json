@@ -1,0 +1,588 @@
+[
+    {
+        "id": "q1",
+        "title": "The Group Chat Leak",
+        "track": "survivor",
+        "country": "Kenya",
+        "description": "A private photo is shared in a WhatsApp group. Learn how to stop the spread and stay safe.",
+        "intro_scene": "You wake up to 50 missed notifications. A private photo you shared in confidence is now in the 'Class of 2024' WhatsApp group.",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "Your heart is pounding. You see the photo. It's definitely yours. What is your immediate reaction?",
+                "choices": [
+                    {
+                        "text": "Leave the group immediately",
+                        "next": "leave_group",
+                        "type": "avoidance"
+                    },
+                    {
+                        "text": "Screenshot the chat as evidence",
+                        "next": "screenshot",
+                        "type": "proactive"
+                    }
+                ]
+            },
+            "leave_group": {
+                "id": "leave_group",
+                "text": "You leave the group. You feel a bit safer not seeing the messages, but you lost the evidence of who posted it.",
+                "feedback": "Leaving protects your peace, but gathering evidence first is helpful for reporting.",
+                "next": "lesson_ncii"
+            },
+            "screenshot": {
+                "id": "screenshot",
+                "text": "You take screenshots of the photo, the sender's number, and the group info. Now you have proof.",
+                "feedback": "Excellent. Evidence is crucial for reporting to platforms or authorities.",
+                "next": "lesson_ncii"
+            },
+            "lesson_ncii": {
+                "id": "lesson_ncii",
+                "text": "This situation is known as Non-Consensual Intimate Image (NCII) abuse.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Understanding NCII",
+                    "what": "In Kenya, sharing intimate images without consent is illegal under the Computer Misuse and Cybercrimes Act.",
+                    "prevent": [
+                        "Check privacy settings",
+                        "Be cautious with cloud backups"
+                    ],
+                    "fix": [
+                        "Report to the platform (WhatsApp/Meta)",
+                        "Don't delete the evidence",
+                        "Seek legal or NGO support"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "I understand. What's next?",
+                        "next": "next_steps"
+                    }
+                ]
+            },
+            "next_steps": {
+                "id": "next_steps",
+                "text": "The photo is still there. You need to get it removed.",
+                "choices": [
+                    {
+                        "text": "Ask the group admin to remove it",
+                        "next": "ask_admin",
+                        "type": "constructive"
+                    },
+                    {
+                        "text": "Threaten the sender in the group",
+                        "next": "threaten",
+                        "type": "risky"
+                    }
+                ]
+            },
+            "ask_admin": {
+                "id": "ask_admin",
+                "text": "The admin apologizes and deletes the message for everyone. It stops the immediate spread.",
+                "feedback": "Admins have the power to remove content. It's a safe and quick first step.",
+                "next": "end_success"
+            },
+            "threaten": {
+                "id": "threaten",
+                "text": "You send an angry message. The sender mocks you, and others join in. The situation escalates.",
+                "feedback": "Anger is valid, but engaging with trolls often makes it worse. Block and report instead.",
+                "next": "end_rough"
+            },
+            "end_success": {
+                "id": "end_success",
+                "text": "You managed to contain the situation and kept evidence. You are safe for now.",
+                "isEnd": true
+            },
+            "end_rough": {
+                "id": "end_rough",
+                "text": "The situation was stressful, but you learned what not to do next time. You are safe now.",
+                "isEnd": true
+            }
+        },
+        "xp": 150,
+        "badge": "Account Shield"
+    },
+    {
+        "id": "q2",
+        "title": "The Bystander",
+        "track": "ally",
+        "country": "Kenya",
+        "description": "You see someone being bullied online. Decide how to help without putting yourself at risk.",
+        "intro_scene": "You are scrolling through Instagram and see a classmate, Amina, being flooded with hateful comments on her new post.",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "Comments say 'You're ugly', 'Delete this', and worse. Amina hasn't replied yet. What do you do?",
+                "choices": [
+                    {
+                        "text": "Reply to the bullies defending her",
+                        "next": "reply_bullies",
+                        "type": "risky"
+                    },
+                    {
+                        "text": "DM Amina to check on her",
+                        "next": "dm_amina",
+                        "type": "supportive"
+                    }
+                ]
+            },
+            "reply_bullies": {
+                "id": "reply_bullies",
+                "text": "You comment back. The bullies turn their attention to you. Now you are both being targeted.",
+                "feedback": "Direct confrontation can backfire. It feeds the trolls.",
+                "next": "lesson_ally"
+            },
+            "dm_amina": {
+                "id": "dm_amina",
+                "text": "You send a DM: 'Hey, I saw the comments. Are you okay? I'm here for you.'",
+                "feedback": "Perfect. Private support means the world to survivors and keeps you safe.",
+                "next": "lesson_ally"
+            },
+            "lesson_ally": {
+                "id": "lesson_ally",
+                "text": "Being an ally means supporting the survivor, not just fighting the abuser.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Safe Allyship",
+                    "what": "Cyberbullying affects mental health deeply. Allies can interrupt the harm.",
+                    "prevent": [
+                        "Report harmful comments",
+                        "Don't share/engage with hate"
+                    ],
+                    "fix": [
+                        "Reach out privately",
+                        "Report the account",
+                        "Encourage them to take a break"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "Got it.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You played your part in making the internet safer.",
+                "isEnd": true
+            }
+        },
+        "xp": 100,
+        "badge": "Ally in Action"
+    },
+    {
+        "id": "q3",
+        "title": "The 'Modeling' Offer",
+        "track": "survivor",
+        "country": "Kenya",
+        "description": "A stranger offers you a modeling gig but asks for 'body shots' first. Spot the red flags of sextortion.",
+        "intro_scene": "You get a DM from 'TalentScout_254'. They say you have 'the look' and want to sign you for a campaign.",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "They send a link to a professional-looking website. Then they ask: 'Can you send some bikini photos so we can see your measurements?'",
+                "choices": [
+                    {
+                        "text": "Send the photos (it's a big opportunity)",
+                        "next": "send_photos",
+                        "type": "risky"
+                    },
+                    {
+                        "text": "Ask for a video call or office meeting first",
+                        "next": "verify",
+                        "type": "proactive"
+                    }
+                ]
+            },
+            "send_photos": {
+                "id": "send_photos",
+                "text": "You send the photos. Immediately, the tone changes. 'Pay me 5000 KES or I post these on your school page.'",
+                "feedback": "This is sextortion. Never pay. They will just ask for more.",
+                "next": "lesson_sextortion"
+            },
+            "verify": {
+                "id": "verify",
+                "text": "You ask to meet. They make excuses: 'I'm traveling', 'Just trust me'. They get aggressive.",
+                "feedback": "Legitimate agencies don't hide. Aggression is a major red flag.",
+                "next": "lesson_sextortion"
+            },
+            "lesson_sextortion": {
+                "id": "lesson_sextortion",
+                "text": "Sextortion relies on fear and shame. You are not alone.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Dealing with Sextortion",
+                    "what": "Sextortion is when someone threatens to share your intimate images unless you pay or do what they say.",
+                    "prevent": [
+                        "Verify accounts before engaging",
+                        "Never share intimate images with strangers"
+                    ],
+                    "fix": [
+                        "Don't pay",
+                        "Stop contact (don't block yet, keep evidence)",
+                        "Report to DCI or Childline (116)"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "Okay, I understand.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You stayed calm and protected yourself. Remember, your safety comes first.",
+                "isEnd": true
+            }
+        },
+        "xp": 200,
+        "badge": "Consent Champion"
+    },
+    {
+        "id": "q4",
+        "title": "Urgent Account Alert",
+        "track": "survivor",
+        "country": "Kenya",
+        "description": "You receive an urgent email claiming your social media account will be deleted. Don't take the bait.",
+        "intro_scene": "An email pops up: 'SECURITY ALERT: Your Instagram will be suspended in 24 hours. Click here to verify.'",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "The email looks real. It has the logo. The link says 'instagram-verify-security.com'. What do you do?",
+                "choices": [
+                    {
+                        "text": "Click the link to save your account",
+                        "next": "click_link",
+                        "type": "risky"
+                    },
+                    {
+                        "text": "Check the sender's email address",
+                        "next": "check_sender",
+                        "type": "proactive"
+                    }
+                ]
+            },
+            "click_link": {
+                "id": "click_link",
+                "text": "The site asks for your password. You enter it. Suddenly, you are logged out of your real app.",
+                "feedback": "Phishing sites often look identical to real ones. Always check the URL.",
+                "next": "lesson_phishing"
+            },
+            "check_sender": {
+                "id": "check_sender",
+                "text": "You tap the sender name. It says 'support@gmail.com', not '@instagram.com'. It's a fake.",
+                "feedback": "Great spotting! Official companies send emails from their own domains.",
+                "next": "lesson_phishing"
+            },
+            "lesson_phishing": {
+                "id": "lesson_phishing",
+                "text": "Phishing attacks try to steal your login info by creating a sense of urgency.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Spotting Phishing",
+                    "what": "Scammers use fear (urgency) to make you act without thinking.",
+                    "prevent": [
+                        "Check the sender email",
+                        "Look for typos",
+                        "Don't click suspicious links"
+                    ],
+                    "fix": [
+                        "Change your password immediately",
+                        "Enable Two-Factor Authentication (2FA)",
+                        "Report the email"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "Got it.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You kept your account safe. Always pause before you click.",
+                "isEnd": true
+            }
+        },
+        "xp": 150,
+        "badge": "Phishing Detective"
+    },
+    {
+        "id": "q5",
+        "title": "The Fake Video Threat",
+        "track": "survivor",
+        "country": "Kenya",
+        "description": "A deepfake video of you goes viral on social media. Learn how to handle AI-generated abuse.",
+        "intro_scene": "You receive a message from an ex: 'Watch this video I made of you. Share it or I'll post it everywhere.'",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "The video shows you saying embarrassing things you never said. It's convincing. What do you do?",
+                "choices": [
+                    {
+                        "text": "Ignore and block them",
+                        "next": "ignore",
+                        "type": "avoidance"
+                    },
+                    {
+                        "text": "Report the video to the platform",
+                        "next": "report",
+                        "type": "proactive"
+                    }
+                ]
+            },
+            "ignore": {
+                "id": "ignore",
+                "text": "You block them. But the video might still be out there if they shared it.",
+                "feedback": "Blocking helps, but reporting ensures removal.",
+                "next": "lesson_deepfake"
+            },
+            "report": {
+                "id": "report",
+                "text": "You report the message and video. The platform takes it down.",
+                "feedback": "Platforms have policies against deepfakes.",
+                "next": "lesson_deepfake"
+            },
+            "lesson_deepfake": {
+                "id": "lesson_deepfake",
+                "text": "Deepfakes are AI-generated fake videos or images that can harm your reputation.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Combating Deepfakes",
+                    "what": "In Kenya, creating or sharing non-consensual deepfakes is illegal under the Computer Misuse and Cybercrimes Act.",
+                    "prevent": [
+                        "Be careful with sharing personal videos/photos",
+                        "Use privacy settings on social media"
+                    ],
+                    "fix": [
+                        "Report to the platform",
+                        "Document everything",
+                        "Contact Childline (116) for support"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "I understand.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You handled the threat wisely. Stay vigilant against emerging tech abuses.",
+                "isEnd": true
+            }
+        },
+        "xp": 180,
+        "badge": "Deepfake Defender"
+    },
+    {
+        "id": "q6",
+        "title": "Exposed Online",
+        "track": "survivor",
+        "country": "Nigeria",
+        "description": "Your personal information is leaked, leading to harassment. Understand doxxing risks.",
+        "intro_scene": "You find your home address, phone number, and photos posted on a forum with threats to visit you.",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "The post is gaining attention. Strangers are commenting. What is your first step?",
+                "choices": [
+                    {
+                        "text": "Delete your social media accounts",
+                        "next": "delete_accounts",
+                        "type": "avoidance"
+                    },
+                    {
+                        "text": "Report the post and gather evidence",
+                        "next": "report_post",
+                        "type": "proactive"
+                    }
+                ]
+            },
+            "delete_accounts": {
+                "id": "delete_accounts",
+                "text": "You delete your accounts. It stops the immediate harassment but you lose your online presence.",
+                "feedback": "Sometimes necessary, but reporting can remove the content.",
+                "next": "lesson_doxxing"
+            },
+            "report_post": {
+                "id": "report_post",
+                "text": "You report the post. The forum removes it and bans the user.",
+                "feedback": "Reporting helps platforms act quickly.",
+                "next": "lesson_doxxing"
+            },
+            "lesson_doxxing": {
+                "id": "lesson_doxxing",
+                "text": "Doxxing is when someone reveals your personal information to cause harm or fear.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Protecting Against Doxxing",
+                    "what": "In Nigeria, doxxing can violate the Cybercrimes (Prohibition, Prevention, etc.) Act 2015.",
+                    "prevent": [
+                        "Limit sharing personal details online",
+                        "Use strong privacy settings"
+                    ],
+                    "fix": [
+                        "Report to the platform",
+                        "Change passwords and enable 2FA",
+                        "Contact NAPTIP for assistance"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "Got it.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You contained the leak. Remember to be cautious with your data.",
+                "isEnd": true
+            }
+        },
+        "xp": 160,
+        "badge": "Privacy Guardian"
+    },
+    {
+        "id": "q7",
+        "title": "The Online Mob",
+        "track": "ally",
+        "country": "South Africa",
+        "description": "You see a friend being attacked online. Choose how to intervene safely.",
+        "intro_scene": "On Facebook, your friend is being called racist slurs in a group post.",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "The comments are piling up. Your friend is upset. How do you help?",
+                "choices": [
+                    {
+                        "text": "Comment defending your friend publicly",
+                        "next": "public_defend",
+                        "type": "risky"
+                    },
+                    {
+                        "text": "Message your friend privately for support",
+                        "next": "private_support",
+                        "type": "supportive"
+                    }
+                ]
+            },
+            "public_defend": {
+                "id": "public_defend",
+                "text": "You comment back. The mob turns on you too. It escalates.",
+                "feedback": "Public confrontation can draw more hate.",
+                "next": "lesson_ally_sa"
+            },
+            "private_support": {
+                "id": "private_support",
+                "text": "You DM: 'I'm here for you. Block them and report.'",
+                "feedback": "Private allyship is safer and more effective.",
+                "next": "lesson_ally_sa"
+            },
+            "lesson_ally_sa": {
+                "id": "lesson_ally_sa",
+                "text": "As an ally, your role is to support without becoming a target.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Safe Intervention",
+                    "what": "Cyberbullying can lead to real harm. In South Africa, it's addressed by the Cybercrimes Act.",
+                    "prevent": [
+                        "Report abusive content",
+                        "Don't engage with bullies"
+                    ],
+                    "fix": [
+                        "Offer private support",
+                        "Encourage reporting to platforms",
+                        "Contact Childline (08000 55 555)"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "Understood.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You made a positive impact without risking yourself.",
+                "isEnd": true
+            }
+        },
+        "xp": 120,
+        "badge": "Ally Advocate"
+    },
+    {
+        "id": "q8",
+        "title": "The 'Film' Opportunity",
+        "track": "survivor",
+        "country": "Ghana",
+        "description": "A fake producer asks for compromising photos. Spot the sextortion scam.",
+        "intro_scene": "DM from 'FilmProducerGH': 'You have star potential. Send photos for casting.'",
+        "scenes": {
+            "start": {
+                "id": "start",
+                "text": "They ask for 'intimate shots' to 'see your range'. What do you do?",
+                "choices": [
+                    {
+                        "text": "Send the photos for the role",
+                        "next": "send_photos",
+                        "type": "risky"
+                    },
+                    {
+                        "text": "Verify their identity first",
+                        "next": "verify",
+                        "type": "proactive"
+                    }
+                ]
+            },
+            "send_photos": {
+                "id": "send_photos",
+                "text": "You send them. They demand money: 'Pay 2000 GHS or I share.'",
+                "feedback": "This is classic sextortion. Never pay.",
+                "next": "lesson_sextortion_gh"
+            },
+            "verify": {
+                "id": "verify",
+                "text": "You ask for proof. They get angry and block you.",
+                "feedback": "Legit opportunities don't pressure or hide.",
+                "next": "lesson_sextortion_gh"
+            },
+            "lesson_sextortion_gh": {
+                "id": "lesson_sextortion_gh",
+                "text": "Sextortion uses blackmail to exploit. You're not at fault.",
+                "isLesson": true,
+                "lessonCard": {
+                    "title": "Escaping Sextortion",
+                    "what": "In Ghana, sextortion violates the Electronic Communications Act.",
+                    "prevent": [
+                        "Don't share intimate images with strangers",
+                        "Verify before engaging"
+                    ],
+                    "fix": [
+                        "Don't pay or comply",
+                        "Report to police or DOVVSU",
+                        "Block and save evidence"
+                    ]
+                },
+                "choices": [
+                    {
+                        "text": "Okay.",
+                        "next": "end"
+                    }
+                ]
+            },
+            "end": {
+                "id": "end",
+                "text": "You avoided the trap. Stay aware of online scams.",
+                "isEnd": true
+            }
+        },
+        "xp": 170,
+        "badge": "Scam Survivor"
+    }
+]
