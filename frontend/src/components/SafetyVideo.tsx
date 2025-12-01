@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Play, Pause, RotateCcw, Video } from 'lucide-react';
 import type { SafetyVideo } from '../types';
 import { geminiService } from '../services/geminiService';
@@ -20,13 +20,7 @@ export const SafetyVideoComponent: React.FC<SafetyVideoProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 
-  useEffect(() => {
-    if (!currentVideo && scenario) {
-      generateVideo();
-    }
-  }, [scenario]);
-
-  const generateVideo = async () => {
+  const generateVideo = useCallback(async () => {
     setIsGenerating(true);
     try {
       const videoScript = await geminiService.generateVideoScript(scenario);
@@ -38,7 +32,13 @@ export const SafetyVideoComponent: React.FC<SafetyVideoProps> = ({
     } finally {
       setIsGenerating(false);
     }
-  };
+  }, [scenario, onVideoGenerated]);
+
+  useEffect(() => {
+    if (!currentVideo && scenario) {
+      generateVideo();
+    }
+  }, [scenario, currentVideo, generateVideo]);
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);

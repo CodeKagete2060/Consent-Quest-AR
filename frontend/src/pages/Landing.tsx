@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, AlertTriangle, TrendingUp, BookOpen, Camera, MessageSquare, User } from 'lucide-react';
 import { Analytics } from '../utils/analytics';
@@ -14,19 +14,19 @@ export const Landing: React.FC = () => {
     const [recentThreats, setRecentThreats] = useState<Threat[]>([]);
     const [isLoadingTip, setIsLoadingTip] = useState(false);
 
-    useEffect(() => {
-        Analytics.landingViewed();
-        loadDashboardData();
-    }, []);
-
-    const loadDashboardData = () => {
+    const loadDashboardData = useCallback(() => {
         // Load recent threats
         const threats = storageService.getThreats();
         setRecentThreats(threats.slice(0, 3)); // Show latest 3
 
         // Load or generate safety tip
         generateSafetyTip();
-    };
+    }, []);
+
+    useEffect(() => {
+        Analytics.landingViewed();
+        loadDashboardData();
+    }, [loadDashboardData]);
 
     const generateSafetyTip = async () => {
         setIsLoadingTip(true);

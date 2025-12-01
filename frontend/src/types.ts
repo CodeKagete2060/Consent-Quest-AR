@@ -86,7 +86,22 @@ export interface SafetyTip {
 // MindAR types
 declare global {
   interface Window {
-    MINDAR: any;
-    THREE: any;
+    MINDAR: {
+      IMAGE: {
+        MindARThree: new (config: {
+          container: HTMLElement;
+          imageTargetSrc: string;
+        }) => {
+          start: () => Promise<void>;
+          addAnchor: (index: number) => { group: { add: (obj: unknown) => void } };
+        };
+      };
+    };
+    THREE: {
+      CanvasTexture: new (canvas: HTMLCanvasElement) => unknown;
+      PlaneGeometry: new (width: number, height: number) => unknown;
+      MeshBasicMaterial: new (options: { map: unknown; transparent?: boolean }) => unknown;
+      Mesh: new (geometry: unknown, material: unknown) => unknown;
+    };
   }
 }

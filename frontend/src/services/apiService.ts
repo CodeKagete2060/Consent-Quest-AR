@@ -1,6 +1,16 @@
 // API Service for connecting frontend to backend
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+interface UserProfileUpdate {
+  ageRange?: string;
+  interests?: string[];
+  country?: string;
+  safetyScore?: number;
+  totalXP?: number;
+  completedQuests?: Array<{ questId: string; score: number; completedAt: Date }>;
+  badges?: string[];
+}
+
 class ApiService {
   private baseURL: string;
 
@@ -8,7 +18,7 @@ class ApiService {
     this.baseURL = baseURL;
   }
 
-  private async request(endpoint: string, options: RequestInit = {}): Promise<any> {
+  private async request(endpoint: string, options: RequestInit = {}): Promise<Record<string, unknown>> {
     const url = `${this.baseURL}${endpoint}`;
     const config: RequestInit = {
       headers: {
@@ -47,7 +57,7 @@ class ApiService {
     return this.request(`/users/${userId}`);
   }
 
-  async updateUserProfile(userId: string, profile: any) {
+  async updateUserProfile(userId: string, profile: UserProfileUpdate) {
     return this.request(`/users/${userId}`, {
       method: 'POST',
       body: JSON.stringify(profile),

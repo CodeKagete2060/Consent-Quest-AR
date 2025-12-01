@@ -16,31 +16,6 @@ export const Scan: React.FC = () => {
     const [analysis, setAnalysis] = useState<ScamAnalysis | null>(null);
     const [capturedImage, setCapturedImage] = useState<string>('');
 
-    const startCamera = useCallback(async () => {
-        try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'environment', width: 640, height: 480 }
-            });
-            setStream(mediaStream);
-            if (videoRef.current) {
-                videoRef.current.srcObject = mediaStream;
-                videoRef.current.play();
-                setStatus('scanning');
-                setError('');
-            }
-        } catch (err) {
-            console.error('Camera access failed:', err);
-            setError('Camera access denied or not available.');
-            setStatus('error');
-        }
-    }, []);
-
-    const stopCamera = useCallback(() => {
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            setStream(null);
-        }
-    }, [stream]);
 
     const captureAndAnalyze = useCallback(async () => {
         if (!videoRef.current || !canvasRef.current) return;
@@ -88,9 +63,33 @@ export const Scan: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        startCamera();
-        return () => stopCamera();
-    }, [startCamera, stopCamera]);
+        const initCamera = async () => {
+            try {
+                const mediaStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment', width: 640, height: 480 }
+                });
+                setStream(mediaStream);
+                if (videoRef.current) {
+                    videoRef.current.srcObject = mediaStream;
+                    videoRef.current.play();
+                    setStatus('scanning');
+                    setError('');
+                }
+            } catch (err) {
+                console.error('Camera access failed:', err);
+                setError('Camera access denied or not available.');
+                setStatus('error');
+            }
+        };
+
+        initCamera();
+        return () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                setStream(null);
+            }
+        };
+    }, [stream]);
 
     const retryScan = () => {
         setError('');

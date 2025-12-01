@@ -15,10 +15,13 @@ export const ARIntro: React.FC = () => {
     const [showProceed, setShowProceed] = useState(false);
     const arContainerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const found = quests.find(q => q.id === questId);
-        if (found) setQuest(found);
+    const questData = React.useMemo(() => {
+        return quests.find(q => q.id === questId) || null;
     }, [questId]);
+
+    useEffect(() => {
+        setQuest(questData);
+    }, [questData]);
 
     useEffect(() => {
         let interval: number;
@@ -26,11 +29,15 @@ export const ARIntro: React.FC = () => {
             interval = setInterval(() => {
                 setTimer(prev => prev + 1);
             }, 1000);
-        } else if (timer >= 10) {
-            setShowProceed(true);
         }
         return () => clearInterval(interval);
     }, [arStarted, timer]);
+
+    useEffect(() => {
+        if (timer >= 10) {
+            setShowProceed(true);
+        }
+    }, [timer]);
 
     const startAR = async () => {
         if (!arContainerRef.current || !quest) return;

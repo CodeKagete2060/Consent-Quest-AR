@@ -11,6 +11,7 @@ export const saveProgress = (xp: number, badge: string, questId: string) => {
     }
 
     const newProgress = {
+        ...current,
         xp: current.xp + xp,
         badges: [...current.badges, badge],
         completedQuests: [...current.completedQuests, questId]

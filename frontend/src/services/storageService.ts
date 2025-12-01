@@ -77,7 +77,7 @@ class StorageService {
     const stored = localStorage.getItem(this.THREATS_KEY);
     if (stored) {
       const threats = JSON.parse(stored);
-      return threats.map((t: any) => ({
+      return threats.map((t: Omit<Threat, 'timestamp'> & { timestamp: string }) => ({
         ...t,
         timestamp: new Date(t.timestamp)
       }));
@@ -110,7 +110,7 @@ class StorageService {
     const stored = localStorage.getItem(this.REPORTS_KEY);
     if (stored) {
       const reports = JSON.parse(stored);
-      return reports.map((r: any) => ({
+      return reports.map((r: Omit<Report, 'timestamp'> & { timestamp: string }) => ({
         ...r,
         timestamp: new Date(r.timestamp)
       }));
@@ -135,7 +135,7 @@ class StorageService {
     const stored = localStorage.getItem(this.VIDEOS_KEY);
     if (stored) {
       const videos = JSON.parse(stored);
-      return videos.map((v: any) => ({
+      return videos.map((v: Omit<SafetyVideo, 'generatedAt'> & { generatedAt: string }) => ({
         ...v,
         generatedAt: new Date(v.generatedAt)
       }));

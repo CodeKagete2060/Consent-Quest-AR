@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star, Award, Share } from 'lucide-react';
 import { getProgress } from '../utils/storage';
@@ -6,12 +6,8 @@ import { ShareCardModal } from '../components/ShareCardModal';
 
 export const Badges: React.FC = () => {
     const navigate = useNavigate();
-    const [progress, setProgress] = useState<{ xp: number; badges: string[]; generatedCards: string[] }>({ xp: 0, badges: [], generatedCards: [] });
+    const [progress] = useState<{ xp: number; badges: string[]; generatedCards: string[] }>(getProgress);
     const [selectedBadge, setSelectedBadge] = useState<string | null>(null);
-
-    useEffect(() => {
-        setProgress(getProgress());
-    }, []);
 
     return (
         <div className="container fade-in">
