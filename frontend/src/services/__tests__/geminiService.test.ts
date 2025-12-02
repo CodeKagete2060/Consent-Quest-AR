@@ -1,5 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { geminiService } from '../geminiService';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+// Mock the GoogleGenerativeAI module
+vi.mock('@google/generative-ai');
 
 describe('GeminiService', () => {
   beforeEach(() => {
@@ -16,10 +20,10 @@ describe('GeminiService', () => {
         })
       };
 
-      // Mock the model
-      const { GoogleGenerativeAI } = await import('@google/generative-ai');
-      const mockGenAI = new GoogleGenerativeAI('');
-      mockGenAI.getGenerativeModel = vi.fn().mockReturnValue(mockModel);
+      // Mock the GoogleGenerativeAI instance
+      (GoogleGenerativeAI as any).mockImplementation(() => ({
+        getGenerativeModel: vi.fn().mockReturnValue(mockModel)
+      }));
 
       const result = await geminiService.analyzeScam('data:image/jpeg;base64,test');
 
@@ -35,9 +39,9 @@ describe('GeminiService', () => {
         generateContent: vi.fn().mockRejectedValue(new Error('API Error'))
       };
 
-      const { GoogleGenerativeAI } = await import('@google/generative-ai');
-      const mockGenAI = new GoogleGenerativeAI('');
-      mockGenAI.getGenerativeModel = vi.fn().mockReturnValue(mockModel);
+      (GoogleGenerativeAI as any).mockImplementation(() => ({
+        getGenerativeModel: vi.fn().mockReturnValue(mockModel)
+      }));
 
       const result = await geminiService.analyzeScam('data:image/jpeg;base64,test');
 
@@ -59,9 +63,9 @@ describe('GeminiService', () => {
         })
       };
 
-      const { GoogleGenerativeAI } = await import('@google/generative-ai');
-      const mockGenAI = new GoogleGenerativeAI('');
-      mockGenAI.getGenerativeModel = vi.fn().mockReturnValue(mockModel);
+      (GoogleGenerativeAI as any).mockImplementation(() => ({
+        getGenerativeModel: vi.fn().mockReturnValue(mockModel)
+      }));
 
       const result = await geminiService.generateSafetyTip({
         ageRange: '18-25',
@@ -85,9 +89,9 @@ describe('GeminiService', () => {
         })
       };
 
-      const { GoogleGenerativeAI } = await import('@google/generative-ai');
-      const mockGenAI = new GoogleGenerativeAI('');
-      mockGenAI.getGenerativeModel = vi.fn().mockReturnValue(mockModel);
+      (GoogleGenerativeAI as any).mockImplementation(() => ({
+        getGenerativeModel: vi.fn().mockReturnValue(mockModel)
+      }));
 
       const result = await geminiService.generateVideoScript('Online Dating Safety');
 

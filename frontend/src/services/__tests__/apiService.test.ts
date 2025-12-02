@@ -8,13 +8,15 @@ describe('ApiService', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
+    // Reset fetch mock
+    global.fetch = vi.fn();
   });
 
 
   describe('User API methods', () => {
     it('should get user profile', async () => {
       const mockUser = { userId: '123', safetyScore: 80 };
-      (global.fetch as any).mockResolvedValue({
+      (global.fetch as unknown as { mockResolvedValue: (value: unknown) => void }).mockResolvedValue({
         ok: true,
         json: () => Promise.resolve(mockUser)
       });

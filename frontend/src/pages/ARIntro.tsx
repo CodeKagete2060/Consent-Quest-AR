@@ -21,7 +21,7 @@ export const ARIntro: React.FC = () => {
     }, [questId]);
 
     useEffect(() => {
-        let interval: number;
+        let interval: NodeJS.Timeout;
         if (arStarted && timer < 10) {
             interval = setInterval(() => {
                 setTimer(prev => prev + 1);

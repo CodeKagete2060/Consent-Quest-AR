@@ -17,7 +17,7 @@ function getUserId() {
 }
 
 // Load existing queue
-function loadQueue(): any[] {
+function loadQueue(): Array<Record<string, unknown>> {
   try {
     const raw = localStorage.getItem(QUEUE_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -27,12 +27,12 @@ function loadQueue(): any[] {
 }
 
 // Save queue
-function saveQueue(queue: any[]) {
+function saveQueue(queue: Array<Record<string, unknown>>) {
   localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
 }
 
 // Add event to offline queue
-function queueEvent(event: string, props: Record<string, any>) {
+function queueEvent(event: string, props: Record<string, unknown>) {
   const queue = loadQueue();
   queue.push({
     event,
@@ -51,9 +51,9 @@ async function flushQueue() {
 
   for (const item of queue) {
     try {
-      await posthog.capture(item.event, item.props);
-    } catch (e) {
-      console.warn("Still offline or PostHog down. Keeping events queued.");
+      await posthog.capture(item.event as string, item.props as Record<string, unknown>);
+    } catch (err) {
+      console.warn("Still offline or PostHog down. Keeping events queued:", err);
       return;
     }
   }
@@ -88,7 +88,7 @@ export function initAnalytics() {
 /* ------------------------------------------------
    TRACK EVENT (with offline fallback)
 --------------------------------------------------- */
-export function track(event: string, props: Record<string, any> = {}) {
+export function track(event: string, props: Record<string, unknown> = {}) {
   // Add internal metadata
   const payload = {
     ...props,
@@ -103,8 +103,9 @@ export function track(event: string, props: Record<string, any> = {}) {
 
   try {
     posthog.capture(event, payload);
-  } catch (err) {
+  } catch (error) {
     // If capture fails (PostHog down), queue it
+    console.warn("PostHog capture failed:", error);
     queueEvent(event, payload);
   }
 }

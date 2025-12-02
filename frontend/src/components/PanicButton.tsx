@@ -7,7 +7,7 @@ export const PanicButton: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const tapCountRef = useRef(0);
-    const tapTimeoutRef = useRef<number | null>(null);
+    const tapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const handlePanic = () => {
         saveLastRoute(location.pathname);

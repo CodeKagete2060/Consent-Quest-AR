@@ -1,57 +1,55 @@
+// Minimal test setup
 import '@testing-library/jest-dom'
-import { expect, afterEach, vi } from 'vitest'
-import { cleanup } from '@testing-library/react'
+import { expect } from 'vitest'
 import * as matchers from '@testing-library/jest-dom/matchers'
 
 expect.extend(matchers)
 
-afterEach(() => {
-  cleanup()
-})
-
 // Mock browser APIs
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: () => ({
     matches: false,
-    media: query,
+    media: '',
     onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => {},
+  }),
 })
 
 Object.defineProperty(window, 'navigator', {
   value: {
-    ...window.navigator,
     onLine: true,
     mediaDevices: {
-      getUserMedia: vi.fn().mockResolvedValue(new MediaStream()),
+      getUserMedia: () => Promise.resolve(new MediaStream()),
     },
   },
   writable: true,
 })
 
+// Mock external dependencies
 vi.mock('posthog-js', () => ({
   __esModule: true,
   default: {
-    init: vi.fn(),
-    capture: vi.fn(),
+    init: () => {},
+    capture: () => {},
   },
 }))
 
-vi.mock('@google/generative-ai', () => ({
-  GoogleGenerativeAI: vi.fn().mockImplementation(() => ({
-    getGenerativeModel: vi.fn().mockReturnValue({
-      generateContent: vi.fn().mockResolvedValue({
-        response: { text: () => 'Mock response' }
+vi.mock('@google/generative-ai', () => {
+  return {
+    GoogleGenerativeAI: vi.fn().mockImplementation(() => ({
+      getGenerativeModel: vi.fn().mockReturnValue({
+        generateContent: vi.fn().mockResolvedValue({
+          response: { text: () => 'Mock response' }
+        })
       })
-    })
-  }))
-}))
+    }))
+  }
+})
 
 vi.mock('lucide-react', () => ({
   Camera: () => 'Camera',
