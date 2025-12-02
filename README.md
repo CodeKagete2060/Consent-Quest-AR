@@ -315,5 +315,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Community**: Peer support networks (coming soon)
 
 ---
-
+### Deployed Link: https://consent-repo-indol.vercel.app/
 *Transforming digital threats into empowerment opportunities through technology and education.* 🌟
+
